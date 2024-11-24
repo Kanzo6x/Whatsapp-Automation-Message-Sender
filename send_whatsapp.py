@@ -2,6 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 import time
+import urllib.parse  
 
 
 with open('numbers.txt', 'r') as file:
@@ -20,13 +21,15 @@ NXT (Next Generation Tech)
 🗓 الأربعاء، 27 نوفمبر
 ⏰ من الساعة 11 صباحاً إلى الساعة 2 ظهراً
 
-⚠ نحب نلفت انتباهك أن العدد محدود، لكن حامل هذه الرسالة ليه فرصة لدعوة شخص واحد لمشاركته الـEvent معنا.\n
+⚠ نحب نلفت انتباهك أن العدد محدود، لكن حامل هذه الرسالة ليه فرصة لدعوة شخص واحد لمشاركته الـEvent معنا.
 
 منتظرينكم ✨
 """
 
 
-driver = webdriver.Chrome()  
+encoded_message = urllib.parse.quote(message_body)
+
+driver = webdriver.Chrome()
 driver.get('https://web.whatsapp.com/')
 
 
@@ -38,17 +41,18 @@ def send_message(phone_number, message):
     
     driver.get(f"https://web.whatsapp.com/send?phone={phone_number}&text={message}")
     time.sleep(25)  
-    
+
     try:
+        
         send_button = driver.find_element(By.CSS_SELECTOR, "button[aria-label='Send']")
         send_button.click()
         print(f"Message sent to {phone_number}")
-    except:
-        print(f"Failed to send message to {phone_number}")
+    except Exception as e:
+        print(f"Failed to send message to {phone_number}. Error: {str(e)}")
 
 
 for number in phone_numbers:
-    send_message(number, message_body)
+    send_message(number, encoded_message)
     time.sleep(5)  
 
 print("All messages have been sent!")
