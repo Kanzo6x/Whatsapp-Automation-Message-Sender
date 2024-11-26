@@ -14,14 +14,10 @@ Congratulations 🎉
 تم قبولك لحضور  Event:
 NXT (Next Generation Tech)
 
-📍 جامعة الأهرام الكندية – مبنى ملحق صيدلة
-🗓 الثلاثاء، 26 نوفمبر
-⏰ من الساعة 11 صباحاً إلى الساعة 2 ظهراً
+📍 جامعة الأهرام الكندية - Hall 8 
+من الساعة 11 للساعة 1
 
-🗓 الأربعاء، 27 نوفمبر
-⏰ من الساعة 11 صباحاً إلى الساعة 2 ظهراً
-
-⚠ نحب نلفت انتباهك أن العدد محدود، لكن حامل هذه الرسالة ليه فرصة لدعوة شخص واحد لمشاركته الـEvent معنا.
+⚠ نحب نلفت انتباهك أن العدد محدود، لكن حامل هذه الرسالة له فرصة لدعوة شخص واحد لمشاركته الـEvent معنا.
 
 منتظرينكم ✨
 """
@@ -43,13 +39,11 @@ def send_message(phone_number, message):
     time.sleep(25)  
 
     try:
-        
         send_button = driver.find_element(By.CSS_SELECTOR, "button[aria-label='Send']")
         send_button.click()
         print(f"Message sent to {phone_number}")
-    except Exception as e:
-        print(f"Failed to send message to {phone_number}. Error: {str(e)}")
-
+    except Exception:
+        print(f"Failed to send message to {phone_number}.")
 
 for number in phone_numbers:
     send_message(number, encoded_message)
